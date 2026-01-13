@@ -1,195 +1,400 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
-	<meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <title>Portfolio | AI & Engineering</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-	<!--/ /---- Put your name in the title of the page ----/ /-->
-	<title>Put Your Name Here</title>
-	
-	<!--/ /-------- Normalize CSS --------/ /-->
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
-	
-	<!--/ /-------- Google Fonts --------/ /-->
-	<!-- Add a link to google fonts here if you want them -->
-	
-	<!--/ /-------- Font Awesome --------/ /-->
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <style>
+        /* -----------------------------------------------------------
+           VARIABLES & RESET
+        ----------------------------------------------------------- */
+        :root {
+            --bg-dark: #050505;
+            --bg-panel: #121212;
+            --primary: #00f3ff; /* Neon Cyan */
+            --secondary: #bc13fe; /* Neon Purple */
+            --text-main: #ffffff;
+            --text-muted: #a0a0a0;
+            --font-head: 'Outfit', sans-serif;
+            --font-mono: 'Space Mono', monospace;
+            --border-glow: 1px solid rgba(255, 255, 255, 0.1);
+        }
 
-	<!--/ /-------- Your Styles --------/ /-->
-	<link href="styles.css" rel="stylesheet">
+        * { box-sizing: border-box; }
 
-	<!--/ /---Put a short description for your site below. 20 words or less---/ /-->
-	<meta description="A short description for your site...">
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-head);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(188, 19, 254, 0.08) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(0, 243, 255, 0.08) 0%, transparent 20%);
+        }
 
-	<!--/ /-------- Needed For Mobile Devices --------/ /-->
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        img { max-width: 100%; display: block; border-radius: 8px; }
 
+        /* -----------------------------------------------------------
+           LAYOUT & UTILS
+        ----------------------------------------------------------- */
+        .wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3 { font-weight: 900; letter-spacing: -1px; margin-top: 0; }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* -----------------------------------------------------------
+           HEADER / NAV
+        ----------------------------------------------------------- */
+        header.primary {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(5, 5, 5, 0.85);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 20px 0;
+        }
+
+        header .wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container h1 {
+            font-size: 1.5rem;
+            line-height: 1.1;
+            margin: 0;
+            text-transform: uppercase;
+            font-family: var(--font-mono);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav a {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            position: relative;
+            color: var(--text-muted);
+        }
+
+        nav a:hover { color: var(--primary); text-shadow: 0 0 8px var(--primary); }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--secondary);
+            transition: width 0.3s ease;
+        }
+        nav a:hover::after { width: 100%; }
+
+        /* -----------------------------------------------------------
+           HERO SECTION
+        ----------------------------------------------------------- */
+        .hero-title {
+            text-align: center;
+            font-size: 4rem;
+            margin: 80px 0 40px;
+            text-transform: uppercase;
+            line-height: 1;
+        }
+
+        /* -----------------------------------------------------------
+           WORK / FEATURED
+        ----------------------------------------------------------- */
+        section { padding: 80px 0; }
+
+        .featured {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            margin-bottom: 100px;
+            background: linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+            padding: 40px;
+            border-radius: 20px;
+            border: var(--border-glow);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .featured img {
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            transition: transform 0.4s ease;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .featured:hover img { transform: scale(1.02); }
+
+        .featured-content h3 { font-size: 2.5rem; margin-bottom: 10px; }
+        .featured-content h4 { 
+            color: var(--primary); 
+            font-family: var(--font-mono); 
+            text-transform: uppercase; 
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .btn-glow {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 30px;
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            font-family: var(--font-mono);
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 243, 255, 0.1);
+            transition: 0.3s;
+        }
+
+        .btn-glow:hover {
+            background: var(--primary);
+            color: var(--bg-dark);
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.6);
+        }
+
+        /* -----------------------------------------------------------
+           PROJECT GRID
+        ----------------------------------------------------------- */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--bg-panel);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border-color: var(--secondary);
+        }
+
+        .card img { width: 100%; height: 200px; object-fit: cover; border-radius: 0; opacity: 0.8; transition: 0.3s; }
+        .card:hover img { opacity: 1; }
+        
+        .card-content { padding: 25px; flex-grow: 1; }
+        .card h3 { font-size: 1.5rem; margin-bottom: 10px; margin-top: 5px; }
+        
+        .tag {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--bg-dark);
+            background: var(--secondary);
+            padding: 4px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        /* -----------------------------------------------------------
+           ABOUT / CONTACT
+        ----------------------------------------------------------- */
+        .secondary {
+            background: linear-gradient(180deg, var(--bg-dark) 0%, #0a0010 100%);
+            position: relative;
+            overflow: hidden;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .secondary::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: var(--secondary);
+            filter: blur(150px);
+            opacity: 0.15;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .profile-photo img {
+            border-radius: 50%;
+            border: 2px solid var(--primary);
+            padding: 5px;
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.2);
+            filter: grayscale(100%) contrast(1.2);
+            transition: 0.5s;
+        }
+        
+        .profile-photo:hover img { filter: grayscale(0%) contrast(1); box-shadow: 0 0 50px rgba(0, 243, 255, 0.5); }
+
+        .about-text h3 { margin-top: 30px; font-size: 1.2rem; text-transform: uppercase; color: var(--text-muted); }
+
+        .contact-links { margin-top: 30px; font-size: 1.1rem; font-family: var(--font-mono); }
+        .contact-links i { margin-right: 15px; color: var(--primary); }
+        
+        .social { margin-top: 30px; display: flex; gap: 20px; }
+        .social a { font-size: 1.8rem; color: var(--text-muted); transition: 0.3s; }
+        .social a:hover { color: var(--secondary); transform: scale(1.1); text-shadow: 0 0 10px var(--secondary); }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .featured, .about-grid { grid-template-columns: 1fr; text-align: center; }
+            .hero-title { font-size: 2.5rem; }
+            nav ul { gap: 15px; }
+            .profile-photo { margin: 0 auto; max-width: 200px; }
+            .featured-img { order: -1; margin-bottom: 20px; }
+        }
+    </style>
 </head>
 
 <body>
-	
-    <!-- ------------------------------------------------------
-    The site is designed to be mobile first. The wrapper elements
-	are in place for when you get to desktop size to contain the 
-	content.
-    ------------------------------------------------------- -->
     
-	<header class="primary">
+    <header class="primary">
         <div class="wrapper">
-            
-			<div class="logo-container">
-				<h1>Your<br>Name<br>Portfolio</h1>
-
-				<!-- ------------------------------------------------------
-				Note that the image of the logo is linked to the home page.
-				------------------------------------------------------- -->
-				<a href="index.html"><img src="https://dummyimage.com/175/c4c4c4/fff&text=logo" alt="logo image" id="logo"></a>
-			</div>
-            
-            
-			<!-- ------------------------------------------------------
-            The navigation here is linking to the sections further down
-            the page.
-            ------------------------------------------------------- -->
-			<nav id="mainnav">
-            	<ul>
-                	<li><a href="#work">Work</a></li>
-                    <li><a href="#about-contact">About</a></li>
-                    <li><a href="#about-contact">Contact</a></li>
+            <div class="logo-container">
+                <a href="index.html">
+                    <h1><span class="gradient-text">ENGINEER</span><br>PORTFOLIO</h1>
+                </a>
+            </div>
+            <nav id="mainnav">
+                <ul>
+                    <li><a href="#work">PROJECTS</a></li>
+                    <li><a href="#skills">STACK</a></li>
+                    <li><a href="#contact">CONTACT</a></li>
                 </ul>
             </nav>
-            
         </div>
-        
     </header>
     
-    <!-- ------------------------------------------------------
-    This is the work section, which has two parts: the featured
-	section and the projects section.
-    ------------------------------------------------------- -->
-    
     <section id="work">
-   		<div class="wrapper">
-        	<h2>Check Out My Best Projects</h2>
-        	<section class="featured">
-                <article>
-                	<!-- ------------------------------------------------------
-                    Link the image below to the detail page for this project.
-                    Use the page.html file to make that page. Also link the 
-                    anchor tag in the paragraph below to the same page.
-                    ------------------------------------------------------- -->
-                	<a href="#"><img src="https://dummyimage.com/510x300/c4c4c4/fff&text=Featured+Project" alt="image"></a>
+        <div class="wrapper">
+            <h2 class="hero-title">System <span class="gradient-text">Override</span></h2>
+            
+            <div class="featured">
+                <article class="featured-img">
+                    <a href="#"><img src="https://dummyimage.com/600x400/121212/00f3ff&text=3D+MRI+RECONSTRUCTION" alt="3D MRI Project"></a>
                 </article>
-                
-                <article>
-                	<h3>Title of Project</h3>
-                    <h4>Challenge Statement</h4>
-                    <p>Before they sold out single-origin coffee fingerstache sartorial freegan master cleanse. Sartorial blog fap, shoreditch scenester tacos poutine. Bespoke brunch viral listicle, keffiyeh celiac paleo organic scenester next level cliche put a bird on it cardigan. Forage kombucha pitchfork literally. Art party narwhal food truck selfies, XOXO leggings distillery four loko fap. An additional sentence.</p> <p><a href="#">Find out how I solved this problem</a></p> 
+                <article class="featured-content">
+                    <h3>Intelligent Diagnostics</h3>
+                    <h4>Capstone Project</h4>
+                    <p>Reimagining medical diagnostics with a <strong>Multi-Agent Framework</strong>. Utilizing <strong>3D Gaussian Splatting</strong> for high-fidelity MRI reconstruction and lightweight models for rapid pathology identification.</p> 
+                    <a href="#" class="btn-glow">Inspect Architecture</a> 
                 </article>
-            </section> <!-- end row -->
-            
-            
-            <!-- ------------------------------------------------------
-            The projects section is for additional projects. I put four in
-			here, but it could be more, or less. You just have to pay
-			attention to how they wrap, and how many you want per row.
-            
-            Note that each image should be linked to the page with more
-            detailed information about that project. You can use a copy of
-            page.html to create those pages.
-            ------------------------------------------------------- -->
-            
-            <section class="projects">
-            
-            	<article>
-                	<h3>Project Title</h3>
-                	<a href="#"><img src="https://dummyimage.com/340x200/c4c4c4/fff&text=Another+Project" alt="image"></a>
-                    <p><strong>Role:</strong> Designer</p>
-                    <p><strong>Description:</strong> Website for a restaurant and redesigned the online menu.</p>
-                </article>
-                
-                <article>
-                	<h3>Project Title</h3>
-                	<a href="#"><img src="https://dummyimage.com/340x200/c4c4c4/fff&text=Another+Project" alt="image"></a>
-                    <p><strong>Role:</strong> Designer</p>
-                    <p><strong>Description:</strong> Website for a restaurant and redesigned the online menu.</p>
-                </article>
-                
-                <article>
-                	<h3>Project Title</h3>
-                	<a href="#"><img src="https://dummyimage.com/340x200/c4c4c4/fff&text=Another+Project" alt="image"></a>
-                    <p><strong>Role:</strong> Designer</p>
-                    <p><strong>Description:</strong> Website for a restaurant and redesigned the online menu.</p>
-                </article>
-				
-				<article>
-                	<h3>Project Title</h3>
-                	<a href="#"><img src="https://dummyimage.com/340x200/c4c4c4/fff&text=Another+Project" alt="image"></a>
-                    <p><strong>Role:</strong> Designer</p>
-                    <p><strong>Description:</strong> Website for a restaurant and redesigned the online menu.</p>
-                </article>
-            
-            </section><!-- end row -->
-            
-        </div> <!-- end work wrapper -->
-    </section>
-    
-    
-    <!-- ------------------------------------------------------
-    This is the about and contact section. The links in the main
-    navigation link to this section. 
-    ------------------------------------------------------- -->
-    
-    <section id="about-contact" class="secondary">
-   		<div class="wrapper">
-        	
-			<div class="profile-photo">
-            	<img src="http://placehold.it/260?text=Your+Photo" alt="image">
             </div>
-			
-            <article>
-				<h2>About Me</h2>
-				<p>Fixie owner, father of 3, fender owner, reclaimed wood collector and javascripter. Acting at the junction of minimalism and intellectual purity to create great work for living breathing human beings. I'm a designer and this is my work.</p>
-				<h3>Skills</h3>
-				<p>I am particularly good at BLAH BLAH and really enjoy BLAH. I am currently learning BLAH and I'm very exited about BLAH BLAH.</p>
-			</article> 
+
+            <div class="projects-grid">
                 
-			<article>
-				<h2>Contact Me!</h2>
-				<p>I am currently looking for opportunities to work on a team at a design shop. Please feel free to contact me by phone, email or through the usual social media channels.</p>
+                <article class="card">
+                    <a href="#"><img src="https://dummyimage.com/600x400/121212/bc13fe&text=SF+Crime+Data" alt="Crime Classification"></a>
+                    <div class="card-content">
+                        <span class="tag">MACHINE LEARNING</span>
+                        <h3>SF Crime Classification</h3>
+                        <p>A predictive analytics mini-project analyzing the San Francisco crime dataset to classify and predict incident categories with high precision.</p>
+                    </div>
+                </article>
+                
+                <article class="card">
+                    <a href="#"><img src="https://dummyimage.com/600x400/121212/bc13fe&text=Python+DSA" alt="Algorithms"></a>
+                    <div class="card-content">
+                        <span class="tag">OPTIMIZATION</span>
+                        <h3>Algorithmic Mastery</h3>
+                        <p>Intensive Data Structures & Algorithms implementation in Python. Solving complex problems via NeetCode & Striver’s SDE sheets.</p>
+                    </div>
+                </article>
+                
+                <article class="card">
+                    <a href="#"><img src="https://dummyimage.com/600x400/121212/bc13fe&text=NeRFs+%26+Vision" alt="Advanced Vision"></a>
+                    <div class="card-content">
+                        <span class="tag">DEEP LEARNING</span>
+                        <h3>Advanced Computer Vision</h3>
+                        <p>Researching Neural Radiance Fields (NeRFs), Transformers, and Gaussian Splatting for next-generation 3D scene synthesis.</p>
+                    </div>
+                </article>
 
-				<!-- ------------------------------------------------------
-				Be sure to encode your email address at this site, so you 
-				don't get spam. http://wbwip.com/wbw/emailencoder.html
-				------------------------------------------------------- -->
-
-				<p><i class="fa fa-envelope" aria-hidden="true"></i> <a href="mailto:&#101;&#109;&#097;&#105;&#108;&#064;&#115;&#111;&#109;&#101;&#119;&#104;&#101;&#114;&#101;&#046;&#099;&#111;&#109;">&#101;&#109;&#097;&#105;&#108;&#064;&#115;&#111;&#109;&#101;&#119;&#104;&#101;&#114;&#101;&#046;&#099;&#111;&#109;</a><br>
-				<i class="fa fa-phone" aria-hidden="true"></i> 123-456-7890</p>
-
-				<!-- ------------------------------------------------------
-				You can see here that I have included font-awesome. It is used
-				to create the icons above and below. You can go to the font-awesome
-				website to see the available icons and swap some out.
-				------------------------------------------------------- -->
-
-				<p class="social">
-					<a href="#"><i class="fab fa-facebook"></i></a>
-					<a href="#"><i class="fab fa-linkedin"></i></a> 
-					<a href="#"><i class="fab fa-twitter-square"></i></a>
-				</p>
-			</article>
-                   
+            </div> 
+            
         </div>
     </section>
     
-    
-    <!-- ------------------------------------------------------
-    The footer section is not doing much on this page. Add more
-    content if necessary.
-    ------------------------------------------------------- -->
+    <section id="skills" class="secondary">
+        <div class="wrapper">
+            <div class="about-grid">
+                
+                <div class="profile-photo">
+                    <img src="https://dummyimage.com/400x400/222/fff&text=DEV" alt="Profile Photo">
+                </div>
+                
+                <article class="about-text">
+                    <h2 class="gradient-text">6th Semester Student</h2>
+                    <p>I am a computer science student passionate about digging deep into code. Whether it's optimizing SQL queries, tweaking EQ settings for high-fidelity audio, or training agents for 3D reconstruction, I am obsessed with performance.</p>
+                    
+                    <h3>Core Stack</h3>
+                    <p style="font-family: var(--font-mono); color: var(--primary);">
+                        > <strong>Languages:</strong> Python, SQL<br>
+                        > <strong>AI/ML:</strong> PyTorch, Gaussian Splatting, NeRFs<br>
+                        > <strong>Data:</strong> DBMS, Indexing, ER Diagrams<br>
+                        > <strong>Tools:</strong> Git, Component Diagrams
+                    </p>
+
+                    <h3>Currently Seeking</h3>
+                    <p>Summer Internship (SDE / ML Engineer)</p>
+
+                    <div id="contact" class="contact-area">
+                        <div class="contact-links">
+                            <p><i class="fa fa-envelope"></i> <a href="mailto:your.email@example.com">your.email@example.com</a></p>
+                            <p><i class="fab fa-linkedin"></i> <a href="#">LinkedIn Profile</a></p>
+                        </div>
+                    </div>
+                </article> 
+            </div>
+        </div>
+    </section>
+
     <footer class="primary">
-    	<div class="wrapper">
-        	<p class="centered">&copy; 2019 all rights reserved</p>
+        <div class="wrapper">
+            <p>&copy; 2026 // SYSTEM ONLINE</p>
         </div>
     </footer>
 
